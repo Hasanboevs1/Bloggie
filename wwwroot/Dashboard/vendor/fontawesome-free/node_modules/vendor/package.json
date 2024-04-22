@@ -1,0 +1,40 @@
+{
+  "name": "vendor",
+  "version": "1.7.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node-dev test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uxnow/vendor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uxnow/vendor/issues"
+  },
+  "homepage": "https://github.com/uxnow/vendor#readme",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "cheerio": "^1.0.0-rc.1",
+    "graphql": "^0.10.1",
+    "graphql-type-json": "^0.1.4",
+    "html-entities": "^1.2.1",
+    "iconv-lite": "^0.4.17",
+    "jschardet": "^1.4.2",
+    "jsonpath": "^0.2.11",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "numeral": "^2.0.6",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
+  },
+  "devDependencies": {
+    "express": "^4.15.3",
+    "express-graphql": "^0.6.6",
+    "node-dev": "^3.1.3"
+  }
+}

@@ -1,0 +1,60 @@
+﻿﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<Bloggie.ViewModels.PostVM>
+@{
+    ViewData["Title"] = "List Of Posts";
+}
+
+<div class="container-fluid">
+    <a class="btn btn-primary mb-1" asp-action="Create" asp-controller="Post" asp-area="Admin">Add Post</a>
+    <div class="card">
+        <div class="card-header bg-primary">
+            <h4 class="card-title text-white">List of Posts</h4>
+        </div>
+        <div class="card-body" style="background-color:lightgray;">
+            @foreach (var post in Model)
+            {
+                <div class="rounded mb-4 bg-white p-2">
+                    <div class="row">
+                        <div class="col-2 d-flex justify-content-center flex-column">
+                            @if (post.ThumbnailUrl == null)
+                            {
+                                <img class="img-fluid" src="~/thumbnails/default_image.png" style="object-fit:cover; height:100%; width:100%">
+
+                            }
+                            else
+                            {
+                                <img class="img-fluid" src="~/thumbnails/@post.ThumbnailUrl" style="object-fit:cover; height:100%; width:100%">
+                            }
+                        </div>
+                        <div class="col-5 d-flex justify-content-center flex-column">
+                            <h4 style="font-size:1.5rem; font-weight:bolder;" class="text-primary fw-bold">@post.Title</h4>
+                            <p>@post.CreatedDate</p>
+                        </div>
+                        <div class="col-5 text-right d-flex justify-content-center flex-column">
+                            <h4 style="font-size:1rem;" class="fw-bold">@post.AuthorName</h4>
+                            <div class="d-flex justify-content-end align-items-center">
+                                <a class="btn btn-warning " asp-area="Admin" asp-controller="Post" asp-action="Edit" asp-route-id="@post.Id" method="post">Edit</a> |
+                                <form class="" asp-area="Admin" asp-controller="Post" asp-action="Delete" asp-route-id="@post.Id" method="post" onsubmit="return confirm('Do you want to delete this post?')">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="card-footer">
+            Page @(Model?.PageCount < Model?.PageNumber ? 0 : Model?.PageNumber) of @Model?.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+                     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
+                     new PagedListRenderOptions()
+            {
+                ContainerDivClasses = new List<string> { "blog", "navigation" },
+                UlElementClasses = new List<string> { "pagination" },
+                LiElementClasses = new List<string> { "page-item", "page-link" },
+                ActiveLiElementClass = "active",
+            })
+        </div>
+    </div>
+</div>
